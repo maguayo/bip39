@@ -119,12 +119,11 @@ function entropyToMnemonic(entropy, wordlist) {
         : words.join(' ');
 }
 exports.entropyToMnemonic = entropyToMnemonic;
-function generateMnemonic(strength, rng, wordlist) {
+function generateMnemonic(strength, wordlist) {
     strength = strength || 128;
     if (strength % 32 !== 0)
         throw new TypeError(INVALID_ENTROPY);
-    rng = rng || randomBytes;
-    return entropyToMnemonic(rng(strength / 8), wordlist);
+    return entropyToMnemonic(randomBytes(strength / 8), wordlist);
 }
 exports.generateMnemonic = generateMnemonic;
 function validateMnemonic(mnemonic, wordlist) {
